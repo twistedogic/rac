@@ -15,3 +15,5 @@ npm start
 ```
 
 3) Point your browser to http://localhost:3000/ and have fun!
+
+*Reference: https://github.com/StockVisualizer/StockApp
