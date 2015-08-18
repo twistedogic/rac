@@ -6,6 +6,8 @@
     "start": ""
   },
   "dependencies": {
+    "async": "^1.4.2",
+    "leagueapi": "^0.4.10",
     "lodash": "^3.10.1",
     "pouchdb": "^4.0.0",
     "request": "^2.60.0"

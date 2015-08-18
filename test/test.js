@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var assert = require('assert');
 var fs = require('fs');
-var sample = fs.readFileSync('../sample/match.json');
+var sample = fs.readFileSync('./sample/match.json');
 sample = JSON.parse(sample);
 var match = require('../lib/match.js');
 var staticData = require('../lib/staticData.js');
