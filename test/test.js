@@ -1,13 +1,13 @@
 var _ = require('lodash');
 var assert = require('assert');
 var fs = require('fs');
-var sample = fs.readFileSync('../sample/matches1.json');
+var sample = fs.readFileSync('../sample/match.json');
 sample = JSON.parse(sample);
-sample = _.sample(sample.matches);
 var match = require('../lib/match.js');
 var staticData = require('../lib/staticData.js');
 var data = require('../lib/data.js');
 var createTarget = require('../lib/util/createTarget.js');
+var scheduler = require('../lib/scheduler.js');
 describe("Scrape Data",function(){
     it("normal match data",function(done){
         match({
@@ -86,14 +86,21 @@ describe("Scrape Data",function(){
     });
 })
 
-describe("Process Data",function(){
-    it("punch flat the data",function(){
-        _.isObject(data(sample));
-    });
-})
+// describe("Process Data",function(){
+//     it("punch flat the data",function(){
+//         _.isObject(data(sample));
+//     });
+// })
 
 describe("Scheduler",function(){
+    this.timeout(800000);
     it("create targets",function(){
-        _.isArray(createTarget);
+        var count = 1000
+        assert.equal(count*40,createTarget(count).length);
     });
+    it("schedule job",function(done){
+        scheduler(2,function(err,res){
+            done();
+        })
+    })
 })
