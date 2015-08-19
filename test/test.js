@@ -3,35 +3,14 @@ var assert = require('assert');
 var fs = require('fs');
 var sample = fs.readFileSync('./sample/match.json');
 sample = JSON.parse(sample);
-var match = require('../lib/match.js');
 var staticData = require('../lib/staticData.js');
 var data = require('../lib/data.js');
 var createTarget = require('../lib/util/createTarget.js');
-var scheduler = require('../lib/scheduler.js');
+var schema = require('../lib/etl/schema.js');
+var query = require('../lib/query.js');
 describe("Scrape Data",function(){
-    it("normal match data",function(done){
-        match({
-            id:1852548676,
-            region:'na'
-        },function(err,res){
-            if(_.isObject(res)){
-                done();
-            }
-        })
-    });
-    it("ranked match data",function(done){
-        match({
-            id:1852538938,
-            region:'na'
-        },function(err,res){
-            if(_.isObject(res)){
-                done();
-            }
-        })
-    });
     it("champion data",function(done){
         staticData({
-            id:34,
             type:'champion',
             version:"5.15.1"
         },function(err,res){
@@ -86,11 +65,21 @@ describe("Scrape Data",function(){
     });
 })
 
-// describe("Process Data",function(){
-//     it("punch flat the data",function(){
-//         _.isObject(data(sample));
-//     });
-// })
+describe("Process Data",function(){
+    it("punch flat the data",function(){
+        _.isObject(data(sample));
+    });
+    it("define schema",function(){
+        _.isObject(schema([sample]));
+    })
+    it("couchdb mapreduce",function(done){
+        query(function(err,res){
+            if(!err){
+                done();
+            }
+        })
+    })
+})
 
 describe("Scheduler",function(){
     this.timeout(800000);
@@ -98,9 +87,5 @@ describe("Scheduler",function(){
         var count = 1000
         assert.equal(count*40,createTarget(count).length);
     });
-    it("schedule job",function(done){
-        scheduler(2,function(err,res){
-            done();
-        })
-    })
 })
+
