@@ -6,7 +6,7 @@ sample = JSON.parse(sample);
 var staticData = require('../lib/staticData.js');
 var data = require('../lib/data.js');
 var createTarget = require('../lib/util/createTarget.js');
-var schema = require('../lib/etl/schema.js');
+var mapping = require('../lib/etl/mapping.js');
 var query = require('../lib/query.js');
 describe("Scrape Data",function(){
     it("champion data",function(done){
@@ -69,11 +69,22 @@ describe("Process Data",function(){
     it("punch flat the data",function(){
         _.isObject(data(sample));
     });
-    it("define schema",function(){
-        _.isObject(schema([sample]));
+    it("static mapping",function(done){
+        mapping({version:'5.11',type:'champion'},function(err,res){
+            if(!err){
+                if(_.isArray(res.mapping)){
+                    done();
+                }
+            }
+        });
     })
     it("couchdb mapreduce",function(done){
-        query(function(err,res){
+        query({
+            key: 254,
+            // key: ['11',254],
+            include_docs : true,
+            reduce:false
+        },function(err,res){
             if(!err){
                 done();
             }
