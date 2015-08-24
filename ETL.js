@@ -25,10 +25,13 @@ mapping({version:'5.11',type:'champion'},function(err,res){
             });
         });
         // testing
-        var data = _.sample(data,3);
+        // var data = _.sample(data,3);
         async.eachSeries(data,function(el,next){
             exportCSV(el,function(err,res){
                 if(!err){
+                    var json = res.split('/');
+                    json = json[json.length - 1];
+                    fs.appendFileSync('./public/list.json',json + '\n');
                     console.log(res);
                     next();
                 }
