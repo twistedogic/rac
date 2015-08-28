@@ -1,8 +1,6 @@
 var fs = require('fs');
 var _ = require('lodash');
 var config = require('./lib/config.js');
-var scheme = require('./lib/scheme.js');
-var toJSON = require('./lib/etl/toJSON.js');
 
 var dir = __dirname + "/data";
 var path = __dirname + "/public";
