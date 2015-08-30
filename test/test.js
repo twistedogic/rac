@@ -8,6 +8,7 @@ var data = require('../lib/data.js');
 var createTarget = require('../lib/util/createTarget.js');
 var mapping = require('../lib/etl/mapping.js');
 var query = require('../lib/query.js');
+var mapreduce = require('../lib/mapreduce.js');
 describe("Scrape Data",function(){
     it("champion data",function(done){
         staticData({

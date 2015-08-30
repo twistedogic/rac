@@ -1,0 +1,9 @@
+{
+  "firebase": "rac2",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

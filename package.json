@@ -8,6 +8,7 @@
   "dependencies": {
     "async": "^1.4.2",
     "express": "^4.13.3",
+    "firebase": "^2.2.9",
     "leagueapi": "^0.4.10",
     "lodash": "^3.10.1",
     "pouchdb": "^4.0.0",
