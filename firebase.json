@@ -1,6 +1,6 @@
 {
   "firebase": "rac2",
-  "public": ".",
+  "public": "frontend",
   "ignore": [
     "firebase.json",
     "**/.*",
